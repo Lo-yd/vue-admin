@@ -11,6 +11,12 @@ import router from './router'
 import store from './store'
 
 
+import SvgIcon from '@/components/SvgIcon'
+
+//注册全局组件
+Vue.component('svg-icon', SvgIcon)
+
+
 Vue.use(ElementUI)
 Vue.config.productionTip = false
 

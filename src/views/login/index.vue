@@ -1,34 +1,43 @@
 <template>
   <div class="login-container">
-    <el-form class="login-form" auto-complete="on" label-position="left">
+    <el-form
+      ref="loginForm"
+      class="login-form"
+      autocomplete="on"
+      label-position="left"
+      :model="loginFrom"
+      :rules="rules"
+    >
       <div class="title-container">
-        <h3 class="title">Login Form</h3>
+        <h3 class="title">XXXXX后台管理系统</h3>
       </div>
 
       <el-form-item prop="username">
         <span class="svg-container">
-          <!-- <svg-icon icon-class="user" /> -->
+          <svg-icon iconClass="icon-zhanghaoguanli" />
         </span>
         <el-input
           ref="username"
-          placeholder="Username"
+          v-model="loginFrom.username"
+          placeholder="用户名"
           name="username"
           type="text"
           tabindex="1"
-          auto-complete="on"
+          autocomplete="on"
         />
       </el-form-item>
 
       <el-form-item prop="password">
         <span class="svg-container">
-          <!-- <svg-icon icon-class="password" /> -->
+          <svg-icon iconClass="icon-mima" />
         </span>
         <el-input
           ref="password"
-          placeholder="Password"
+          v-model="loginFrom.password"
+          placeholder="密码"
           name="password"
           tabindex="2"
-          auto-complete="on"
+          autocomplete="on"
         />
         <span class="show-pwd">
           <!-- <svg-icon
@@ -38,7 +47,7 @@
       </el-form-item>
 
       <el-button type="primary" style="width: 100%; margin-bottom: 30px"
-        >Login</el-button
+        >登录</el-button
       >
 
       <div class="tips">
@@ -50,13 +59,30 @@
 </template>
 
 <script>
-
 export default {
   name: 'Login',
+  data () {
+    return {
+      loginFrom: {
+        username: 'admin',
+        password: '12345678'
+      },
+      rules: {
+        username: [{ required: true, trigger: 'blur', }],
+        password: [{ required: true, trigger: 'blur', }]
+      }
 
+    }
+  },
+
+  mounted () {
+    // console.log(this.loginFrom)
+    console.log(this.loginFrom)
+  }
 }
 </script>
-
+<style>
+</style>
 <style lang="scss">
 /* 修复input 背景不协调 和光标变色 */
 /* Detail see https://github.com/PanJiaChen/vue-element-admin/pull/927 */
