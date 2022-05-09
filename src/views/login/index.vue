@@ -46,7 +46,10 @@
         </span>
       </el-form-item>
 
-      <el-button type="primary" style="width: 100%; margin-bottom: 30px"
+      <el-button
+        type="primary"
+        style="width: 100%; margin-bottom: 30px"
+        @click="handleLogin"
         >登录</el-button
       >
 
@@ -59,26 +62,47 @@
 </template>
 
 <script>
+import { validUsername } from '@/utils/validate'
 export default {
   name: 'Login',
   data () {
+    //自定义验证规则
+    const validateUsername = (rule, value, callback) => {
+      validUsername(value) ? callback() : callback(new Error('请输入正确的用户名'))
+    }
+    const validatePassword = (rule, value, callback) => {
+      if (value.length < 6) {
+        callback(new Error('密码不能少于6位'))
+      } else {
+        callback()
+      }
+    }
     return {
       loginFrom: {
         username: 'admin',
         password: '12345678'
       },
       rules: {
-        username: [{ required: true, trigger: 'blur', }],
-        password: [{ required: true, trigger: 'blur', }]
+        username: [{ required: true, trigger: 'blur', validator: validateUsername }],
+        password: [{ required: true, trigger: 'blur', validator: validatePassword }]
       }
 
     }
   },
+  methods: {
+    handleLogin () {
+      this.$refs.loginForm.validate((valid) => {
+        if (valid) {
 
-  mounted () {
-    // console.log(this.loginFrom)
-    console.log(this.loginFrom)
+        } else {
+          console.log('error submit!!')
+          return false
+        }
+      })
+    }
   }
+
+
 }
 </script>
 <style>
