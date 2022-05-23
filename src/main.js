@@ -20,6 +20,9 @@ Vue.component('svg-icon', SvgIcon)
 Vue.use(ElementUI)
 Vue.config.productionTip = false
 
+
+require('../mock/test')
+
 new Vue({
   router,
   store,

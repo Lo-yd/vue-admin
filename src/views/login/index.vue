@@ -66,10 +66,11 @@ import { validUsername } from '@/utils/validate'
 export default {
   name: 'Login',
   data () {
-    //自定义验证规则
+    //自定义用户名的验证规则
     const validateUsername = (rule, value, callback) => {
       validUsername(value) ? callback() : callback(new Error('请输入正确的用户名'))
     }
+    //自定义密码的验证规则
     const validatePassword = (rule, value, callback) => {
       if (value.length < 6) {
         callback(new Error('密码不能少于6位'))
@@ -86,14 +87,17 @@ export default {
         username: [{ required: true, trigger: 'blur', validator: validateUsername }],
         password: [{ required: true, trigger: 'blur', validator: validatePassword }]
       }
-
     }
   },
   methods: {
     handleLogin () {
       this.$refs.loginForm.validate((valid) => {
         if (valid) {
-
+          //验证通过
+          this.$store.dispatch('user/login', this.loginFrom).then(() => {
+            console.log('jjjj')
+          })
+          console.log(valid, this.loginFrom, "dddd")
         } else {
           console.log('error submit!!')
           return false

@@ -3,12 +3,19 @@ import VueRouter from 'vue-router'
 
 Vue.use(VueRouter)
 
+//Layout组件
+import Layout from '@/layout'
 const routes = [
   {
     name: 'Login',
     path: '/login',
     component: () => import('@/views/login/index'),
     hidden: true
+  },
+  {
+    path: '/',
+    // redirect: '',
+    component: Layout,
   },
   {
     name: 'Page404',
