@@ -6,15 +6,16 @@
         :model="formState"
         name="loginForm"
         autocomplete="off"
+        scrollToFirstError
         @finish="onFinish"
         @finishFailed="onFinishFailed"
       >
         <h3 class="title">Login Form</h3>
         <a-form-item
           name="username"
-          :rules="[{ required: true, message: 'Please input your username!' }]"
+          :rules="[{ required: true, message: '请输入账号！' }]"
         >
-          <a-input v-model:value="formState.username">
+          <a-input v-model:value="formState.username" allowClear>
             <template #prefix>
               <UserOutlined class="site-form-item-icon" />
             </template>
@@ -23,7 +24,7 @@
 
         <a-form-item
           name="password"
-          :rules="[{ required: true, message: 'Please input your password!' }]"
+          :rules="[{ required: true, message: '请输入密码' }]"
         >
           <a-input-password v-model:value="formState.password">
             <template #prefix>
@@ -39,7 +40,7 @@
         </a-form-item>
 
         <a-form-item>
-          <a-button type="primary" html-type="submit">Submit</a-button>
+          <a-button type="primary" html-type="submit">登录</a-button>
         </a-form-item>
       </a-form>
     </section>
@@ -57,12 +58,12 @@ interface FormState {
 const formState = reactive<FormState>({
   username: "",
   password: "",
-  remember: true,
+  remember: false,
 });
-const onFinish = (values: any) => {
+const onFinish = (values: FormState) => {
   console.log("Success:", values);
 };
-const onFinishFailed = (errorInfo: any) => {
+const onFinishFailed = (errorInfo: FormState) => {
   console.log("Failed:", errorInfo);
 };
 </script>
@@ -77,6 +78,7 @@ const onFinishFailed = (errorInfo: any) => {
   justify-content: center;
   flex-wrap: nowrap;
   background-color: #b6b6b6;
+
   .login-form {
     display: flex;
     align-content: center;
@@ -85,10 +87,12 @@ const onFinishFailed = (errorInfo: any) => {
     background-color: #ffffff;
     height: 400px;
     width: 400px;
+
     .form {
       height: 100%;
       width: 100%;
       padding: 30px;
+
       .title {
         font-size: 26px;
         // color: #eee;
@@ -96,14 +100,20 @@ const onFinishFailed = (errorInfo: any) => {
         text-align: center;
         font-weight: 700;
       }
+
       .ant-form-item {
         .ant-input-affix-wrapper {
           height: 50px;
-          input.ant-input {
-            // padding: 20px;
-            background-color: pink;
+
+          /deep/.ant-input {
+            padding: 12px 5px 12px 10px;
           }
         }
+      }
+
+      .ant-btn-primary {
+        width: 100%;
+        height: 40px;
       }
     }
   }
