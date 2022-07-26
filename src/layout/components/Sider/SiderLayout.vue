@@ -19,25 +19,6 @@
 </template>
 
 <script lang="ts" setup>
-// import {
-//   UserOutlined,
-//   VideoCameraOutlined,
-//   UploadOutlined,
-// } from "@ant-design/icons-vue";
-// import { defineComponent, ref } from "vue";
-// export default defineComponent({
-//   components: {
-//     UserOutlined,
-//     VideoCameraOutlined,
-//     UploadOutlined,
-//   },
-//   setup() {
-//     return {
-//       selectedKeys: ref<string[]>(["1"]),
-//       collapsed: ref<boolean>(false),
-//     };
-//   },
-// });
 import {
   UserOutlined,
   VideoCameraOutlined,
